@@ -15,11 +15,13 @@ const List: React.FC<ListProps> = ({ items }) => {
   };
 
   return (
-    <div className="grid-container">
+    <div className="pokemon-list">
       {items.map((item) => (
-        <div key={item} className="grid-item">
-          {item}
-          <button onClick={() => handleRemove(item)}>Remove</button>
+        <div key={item} className="pokemon-card">
+          <p className="pokemon-name">{item}</p>
+          <button className="pokemon-button" onClick={() => handleRemove(item)}>
+            Remove
+          </button>
         </div>
       ))}
     </div>
