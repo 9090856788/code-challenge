@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import List from "./components/List";
 
 const App: React.FC = () => {
   const [pokemonList, setPokemonList] = useState<string[]>([]);
@@ -8,15 +9,19 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchPokemon = async () => {
       try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=151`);
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon?limit=151`
+        );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setPokemonList(data.results.map((pokemon: { name: string }) => pokemon.name));
+        setPokemonList(
+          data.results.map((pokemon: { name: string }) => pokemon.name)
+        );
       } catch (error) {
         console.log(error);
-        setError('Failed to fetch pokemon data');
+        setError("Failed to fetch pokemon data");
       } finally {
         setLoading(false);
       }
@@ -29,14 +34,12 @@ const App: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
-      <h1>Pokémon List</h1>
-      <ul>
-        {pokemonList.map((name) => (
-          <li key={name}>{name}</li>
-        ))}
-      </ul>
-    </div>
+    <React.Fragment>
+      <div>
+        <h1>Pokémon List</h1>
+        <List items={pokemonList} />
+      </div>
+    </React.Fragment>
   );
 };
 
