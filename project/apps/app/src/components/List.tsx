@@ -1,15 +1,18 @@
 import React from "react";
+import "./List.css";
 
 interface ListProps {
   items: string[];
 }
 
 const List: React.FC<ListProps> = ({ items }) => (
-  <ul>
+  <div className="grid-container">
     {items.map((item) => (
-      <li key={item}>{item}</li>
+      <div key={item} className="grid-item">
+        {item}
+      </div>
     ))}
-  </ul>
+  </div>
 );
 
 export default List;
